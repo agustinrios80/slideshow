@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Subir foto</title>
+  <link rel="stylesheet" href="estilo-upload.css">
+  <style>
+    body {
+      background: #111;
+      color: white;
+      text-align: center;
+      font-family: Arial;
+      padding-top: 40px;
+    }
+    form {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    input, button {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    button {
+      background: #4caf50;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #44a048;
+    }
+  </style>
+</head>
+<body>
+  <h2>Subí tu foto 📸</h2>
+
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="photo" accept="image/*" required>
+    <br>
+    <button type="submit">Subir foto</button>
+  </form>
+</body>
+</html>
