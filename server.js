@@ -142,6 +142,10 @@ app.get("/images", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.redirect("/upload");
+});
+
 // Iniciar servidor y mostrar QR
 app.listen(PORT, async () => {
   const uploadURL = `http://${localIP}:${PORT}/upload`;
@@ -154,3 +158,4 @@ app.listen(PORT, async () => {
     if (!err) console.log(url);
   });
 });
+
