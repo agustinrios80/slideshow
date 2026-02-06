@@ -181,29 +181,27 @@ app.get("/gallery", async (req, res) => {
             background: #191970;
             color: white;
             font-family: Arial;
+            margin: 0;
             padding: 20px;
           }
-          .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+          header {
+            text-align: center;
+            margin-bottom: 24px;
           }
-          img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,.5);
+          header h1 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
           }
-          a {
-            color: #4caf50;
-          }
+          
             .upload-btn {
         display: inline-block;
         margin-bottom: 20px;
-      }
+        }
 
         .upload-btn img {
-          width: 220px;
-          max-width: 80%;
+          width: 100%;
+          max-width: 260px;
+          border-radius: 12px;
           cursor: pointer;
           transition: transform 0.2s ease, opacity 0.2s ease;
         }
@@ -220,6 +218,53 @@ app.get("/gallery", async (req, res) => {
         display: flex;
         justify-content: center;
       }
+      .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 15px;
+        }
+        img {
+          width: 100%;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0,0,0,.5);
+        }
+        a {
+          color: #4caf50;
+        }
+        /* 📱 Tablets */
+      @media (min-width: 600px) {
+        header h1 {
+          font-size: 2rem;
+        }
+
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
+      }
+
+      /* 💻 Desktop */
+      @media (min-width: 900px) {
+        body {
+          padding: 24px 40px;
+        }
+
+        .grid {
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          gap: 18px;
+        }
+
+        /* 📌 Botón siempre visible en mobile */
+        
+        @media (max-width: 599px) {
+          .upload-btn {
+            position: sticky;
+            top: 0;
+            background: #191970;
+            padding: 12px 0;
+            z-index: 10;
+          }
+        }
 
         </style>
       </head>
