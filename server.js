@@ -107,7 +107,44 @@ app.get("/slideshow", (req, res) => {
   <html>
   <head>
     <title>Imagen subida</title>
-    <link rel="stylesheet" href="public/style.css">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #191970;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+      }
+      .card {
+        background: #1e1e1e;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        width: 320px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      }
+      img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+      a {
+        display: block;
+        margin-top: 10px;
+        padding: 10px;
+        background: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+      }
+      a:hover {
+        background: #45a049;
+      }
+    </style>
   </head>
   <body>
     <div class="card">
@@ -139,7 +176,95 @@ app.get("/gallery", async (req, res) => {
       <html>
       <head>
         <title>Galería</title>
-        <link rel="stylesheet" href="public/style.css">
+        <style>
+          body {
+            background: #191970;
+            color: white;
+            font-family: Arial;
+            margin: 0;
+            padding: 20px;
+          }
+          header {
+            text-align: center;
+            margin-bottom: 24px;
+          }
+          header h1 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+          }
+          
+            .upload-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+        }
+
+        .upload-btn img {
+          width: 100%;
+          max-width: 260px;
+          border-radius: 12px;
+          cursor: pointer;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .upload-btn img:hover {
+          transform: scale(1.05);
+          opacity: 0.9;
+        }
+
+        .upload-btn img:active {
+          transform: scale(0.97);
+        }
+        .upload-btn {
+        display: flex;
+        justify-content: center;
+      }
+      .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 15px;
+        }
+        img {
+          width: 100%;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0,0,0,.5);
+        }
+        a {
+          color: #4caf50;
+        }
+        /* 📱 Tablets */
+      @media (min-width: 600px) {
+        header h1 {
+          font-size: 2rem;
+        }
+
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
+      }
+
+      /* 💻 Desktop */
+      @media (min-width: 900px) {
+        body {
+          padding: 24px 40px;
+        }
+
+        .grid {
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          gap: 18px;
+        }
+          /* 📌 Botón siempre visible en mobile */
+    @media (max-width: 599px) {
+      .upload-btn {
+        position: sticky;
+        top: 0;
+        background: #191970;
+        padding: 12px 0;
+        z-index: 10;
+      }
+    }
+
+        </style>
       </head>
       <body>
       <header>
