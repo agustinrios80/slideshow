@@ -9,6 +9,13 @@ const cloudinary = require("cloudinary").v2;
 
 dotenv.config();
 
+// Debug de variables de entorno
+console.log("Cloudinary:", {
+  cloud: process.env.CLOUDINARY_CLOUD_NAME,
+  key: process.env.CLOUDINARY_API_KEY ? "OK" : "NO",
+  secret: process.env.CLOUDINARY_API_SECRET ? "OK" : "NO"
+});
+
 // Configurar Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -19,7 +26,7 @@ cloudinary.config({
 const app = express();
 const upload = multer({ dest: "uploads/" });
 
-// Función para obtener IP local
+// IP local (solo para mostrar QR en local)
 function getLocalIP() {
   const interfaces = os.networkInterfaces();
   for (let iface in interfaces) {
@@ -33,39 +40,49 @@ function getLocalIP() {
 }
 
 const localIP = getLocalIP();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Archivos estáticos
 app.use(express.static(__dirname));
+
+// Home → upload
+app.get("/", (req, res) => {
+  res.redirect("/upload");
+});
 
 // Página de subida
 app.get("/upload", (req, res) => {
   res.sendFile(path.join(__dirname, "upload.html"));
 });
 
-// Procesar subida + Cloudinary
+// Subida de imagen + Cloudinary
 app.post("/upload", upload.single("photo"), async (req, res) => {
   try {
+    if (!req.file) {
+      return res.status(400).send("No se recibió ninguna imagen.");
+    }
+
     const result = await cloudinary.uploader.upload(req.file.path);
 
     // borrar archivo local
     fs.unlinkSync(req.file.path);
 
-    // redirigir al slideshow con parámetro URL
-    res.redirect(`/slideshow?img=${encodeURIComponent(result.secure_url)}`);
+    console.log("Imagen subida:", result.secure_url);
 
+    // redirigir con la imagen
+    res.redirect(`/slideshow?img=${encodeURIComponent(result.secure_url)}`);
   } catch (err) {
     console.error("Error subiendo a Cloudinary:", err);
     res.status(500).send("❌ Error al subir la imagen.");
   }
 });
 
-// Página de proyección dinámica
+// Página de proyección
 app.get("/slideshow", (req, res) => {
   const imageUrl = req.query.img;
 
   if (!imageUrl) {
-    return res.send("No hay imagen para mostrar.");
+    return res.redirect("/upload");
   }
 
   res.send(`
@@ -90,7 +107,7 @@ app.get("/slideshow", (req, res) => {
         padding: 30px;
         border-radius: 12px;
         text-align: center;
-        width: 300px;
+        width: 320px;
         box-shadow: 0 0 20px rgba(0,0,0,0.5);
       }
       img {
@@ -124,38 +141,84 @@ app.get("/slideshow", (req, res) => {
   `);
 });
 
-// API para obtener imagenes de Cloudinary (carpeta root)
+// API para slideshow (todas las imágenes de Cloudinary)
 app.get("/images", async (req, res) => {
   try {
     const result = await cloudinary.search
-      .expression("folder:uploads OR *")
+      .expression("resource_type:image")
       .sort_by("created_at", "desc")
       .max_results(30)
       .execute();
 
-    const urls = result.resources.map(img => img.secure_url);
-
-    res.json(urls);
+    res.json(result.resources.map(img => img.secure_url));
   } catch (err) {
-    console.error(err);
+    console.error("Error obteniendo imágenes:", err);
     res.json([]);
   }
 });
 
-app.get("/", (req, res) => {
-  res.redirect("/upload");
+app.get("/gallery", async (req, res) => {
+  try {
+    const result = await cloudinary.search
+      .sort_by("created_at", "desc")
+      .max_results(30)
+      .execute();
+
+    const images = result.resources.map(img => img.secure_url);
+
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Galería</title>
+        <style>
+          body {
+            background: #111;
+            color: white;
+            font-family: Arial;
+            padding: 20px;
+          }
+          .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+          }
+          img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,.5);
+          }
+        </style>
+      </head>
+      <body>
+        <h1>📸 Galería</h1>
+        <a href="/upload" style="color:#4caf50">Subir otra imagen</a>
+        <div class="grid">
+          ${images.map(url => `<img src="${url}">`).join("")}
+        </div>
+      </body>
+      </html>
+    `);
+  } catch (e) {
+    res.send("Error cargando galería");
+  }
 });
 
-// Iniciar servidor y mostrar QR
-app.listen(PORT, async () => {
-  const uploadURL = `http://${localIP}:${PORT}/upload`;
-  console.log(`Servidor corriendo en:`);
-  console.log(`- Subida: ${uploadURL}`);
-  console.log(`- Proyección: http://localhost:${PORT}/slideshow`);
 
-  // Generar QR en consola
-  QRCode.toString(uploadURL, { type: "terminal" }, (err, url) => {
-    if (!err) console.log(url);
-  });
+// Iniciar servidor
+app.listen(PORT, () => {
+  const uploadURL =
+    process.env.PORT
+      ? `/upload`
+      : `http://${localIP}:${PORT}/upload`;
+
+  console.log("Servidor corriendo");
+  console.log("- Subida:", uploadURL);
+  console.log("- Proyección:", "/slideshow");
+
+  if (!process.env.PORT) {
+    QRCode.toString(uploadURL, { type: "terminal" }, (err, url) => {
+      if (!err) console.log(url);
+    });
+  }
 });
-
