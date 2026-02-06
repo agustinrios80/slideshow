@@ -107,7 +107,7 @@ app.get("/slideshow", (req, res) => {
   <html>
   <head>
     <title>Imagen subida</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="public/style.css">
   </head>
   <body>
     <div class="card">
@@ -139,7 +139,7 @@ app.get("/gallery", async (req, res) => {
       <html>
       <head>
         <title>Galería</title>
-        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="public/style.css">
       </head>
       <body>
       <header>
