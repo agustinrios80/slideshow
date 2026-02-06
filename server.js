@@ -71,6 +71,22 @@ app.post("/upload", upload.single("photo"), async (req, res) => {
 
     console.log("Imagen subida:", result.secure_url);
 
+    // limpiar imágenes viejas (5 minutos)
+const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+
+const oldImages = await cloudinary.search
+  .expression("resource_type:image")
+  .sort_by("created_at", "asc")
+  .max_results(100)
+  .execute();
+
+for (const img of oldImages.resources) {
+  if (new Date(img.created_at) < fiveMinutesAgo) {
+    await cloudinary.uploader.destroy(img.public_id);
+    console.log("🗑️ Borrada:", img.public_id);
+  }
+}
+
     res.redirect(`/slideshow?img=${encodeURIComponent(result.secure_url)}`);
   } catch (err) {
     console.error("Error subiendo a Cloudinary:", err);
