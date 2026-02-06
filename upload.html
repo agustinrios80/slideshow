@@ -5,92 +5,94 @@
   <link rel="stylesheet" href="estilo-upload.css">
   <link rel="stylesheet" href="/style.css">
   <style>
-        /* Reset suave */
-    * {
-      box-sizing: border-box;
-    }
+       * {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #191970;
-      font-family: Arial, sans-serif;
-      color: white;
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #191970;
+  font-family: Arial, sans-serif;
+  color: white;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
 
-    /* Contenedor */
-    .upload-container {
-      width: 100%;
-      max-width: 360px;
-      background: #1e1e3f;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.4);
-      text-align: center;
-    }
+/* Tarjeta */
+.upload-container {
+  width: 100%;
+  max-width: 380px;
+  background: #1e1e3f;
+  padding: 28px 22px;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.5);
+  text-align: center;
+}
 
-    /* Título */
-    .upload-container h1 {
-      margin-bottom: 20px;
-      font-size: 1.5rem;
-    }
+/* Título */
+.upload-container h1 {
+  font-size: 1.6rem;
+  margin-bottom: 24px;
+}
 
-    /* Form */
-    .upload-container form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+/* Formulario */
+.upload-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 
-    /* Input file */
-    .upload-container input[type="file"] {
-      background: white;
-      color: black;
-      padding: 10px;
-      border-radius: 8px;
-    }
+/* Input file */
+.upload-container input[type="file"] {
+  width: 100%;
+  background: white;
+  color: black;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+}
 
-    /* Botón */
-    .upload-container button {
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: #4caf50;
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
+/* Botón */
+.upload-container button {
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #4caf50;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .upload-container button:active {
-      transform: scale(0.97);
-    }
+.upload-container button:active {
+  transform: scale(0.96);
+}
 
-    /* 💻 Desktop */
-    @media (min-width: 768px) {
-      .upload-container {
-        max-width: 420px;
-        padding: 32px;
-      }
+/* 💻 Desktop */
+@media (min-width: 768px) {
+  .upload-container {
+    padding: 36px 32px;
+  }
 
-      .upload-container h1 {
-        font-size: 1.8rem;
-      }
-    }
+  .upload-container h1 {
+    font-size: 1.9rem;
+  }
+}
 
   </style>
 </head>
 <body>
-  <h2>Subí tu foto 📸</h2>
+  <div class="upload-container">
+    <h1>Subí tu foto 📸</h1>
 
-  <form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="photo" accept="image/*" required>
-    <br>
-    <button type="submit">Subir foto</button>
-  </form>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" name="photo" accept="image/*" required>
+      <button type="submit">Subir foto</button>
+    </form>
+  </div>
 </body>
 </html>
