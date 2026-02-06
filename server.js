@@ -196,11 +196,38 @@ app.get("/gallery", async (req, res) => {
           a {
             color: #4caf50;
           }
+            .upload-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+        .upload-btn img {
+          width: 220px;
+          max-width: 80%;
+          cursor: pointer;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .upload-btn img:hover {
+          transform: scale(1.05);
+          opacity: 0.9;
+        }
+
+        .upload-btn img:active {
+          transform: scale(0.97);
+        }
+        .upload-btn {
+        display: flex;
+        justify-content: center;
+      }
+
         </style>
       </head>
       <body>
         <h1>Cumple de jazmin</h1>
-        <a href="/upload">Subir otra imagen</a>
+        <a href="/upload" class="upload-btn">
+          <img src="/assets/WhatsApp Image 2026-02-06 at 02.07.41 (1).jpeg" alt="Subir imagen>
+        </a>
         <div class="grid">
           ${images.map(url => `<img src="${url}">`).join("")}
         </div>
