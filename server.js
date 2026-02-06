@@ -111,7 +111,7 @@ app.get("/slideshow", (req, res) => {
       body {
         margin: 0;
         padding: 0;
-        background: #111;
+        background: #191970;
         color: white;
         display: flex;
         justify-content: center;
@@ -178,7 +178,7 @@ app.get("/gallery", async (req, res) => {
         <title>Galería</title>
         <style>
           body {
-            background: #111;
+            background: #191970;
             color: white;
             font-family: Arial;
             padding: 20px;
