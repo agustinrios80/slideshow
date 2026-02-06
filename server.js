@@ -1,3 +1,4 @@
+const cron = require("node-cron");
 const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
@@ -201,6 +202,34 @@ app.get("/gallery", async (req, res) => {
     `);
   } catch (e) {
     res.send("Error cargando galería");
+  }
+});
+
+const cron = require("node-cron");
+
+cron.schedule("0 * * * *", async () => {
+  console.log("🧹 Limpiando imágenes viejas...");
+
+  try {
+    const yesterday = new Date(Date.now() - 5 * 60 * 1000);
+
+    const result = await cloudinary.search
+      .expression("resource_type:image")
+      .sort_by("created_at", "asc")
+      .max_results(100)
+      .execute();
+
+    for (const img of result.resources) {
+      const createdAt = new Date(img.created_at);
+
+      if (createdAt < yesterday) {
+        await cloudinary.uploader.destroy(img.public_id);
+        console.log("🗑️ Borrada:", img.public_id);
+      }
+    }
+
+  } catch (err) {
+    console.error("Error limpiando imágenes:", err);
   }
 });
 
