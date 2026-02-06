@@ -224,13 +224,19 @@ cron.schedule("0 * * * *", async () => {
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log("Servidor corriendo");
-  console.log("- Subida:", "/upload");
-  console.log("- Galería:", "/gallery");
 
-  if (!process.env.PORT) {
+  if (process.env.PORT) {
+    console.log("- Producción (Render)");
+    console.log("- Upload: /upload");
+    console.log("- Gallery: /gallery");
+  } else {
     const uploadURL = `http://${localIP}:${PORT}/upload`;
+    console.log("- Subida:", uploadURL);
+    console.log("- Galería:", `http://${localIP}:${PORT}/gallery`);
+
     QRCode.toString(uploadURL, { type: "terminal" }, (err, url) => {
       if (!err) console.log(url);
     });
   }
 });
+
