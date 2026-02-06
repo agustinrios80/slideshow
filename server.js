@@ -199,7 +199,7 @@ app.get("/gallery", async (req, res) => {
         </style>
       </head>
       <body>
-        <h1>📸 Galería</h1>
+        <h1>Cumple de jazmin</h1>
         <a href="/upload">Subir otra imagen</a>
         <div class="grid">
           ${images.map(url => `<img src="${url}">`).join("")}
