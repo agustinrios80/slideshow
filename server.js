@@ -224,10 +224,12 @@ app.get("/gallery", async (req, res) => {
         </style>
       </head>
       <body>
+      <header>
         <h1>Cumple de jazmin</h1>
         <a href="/upload" class="upload-btn">
-          <img src="/assets/WhatsApp Image 2026-02-06 at 02.07.41 (1).jpeg" alt="Subir imagen>
+          <img src="/assets/subir-imagen.jpeg" alt="Subir imagen">
         </a>
+      </header>
         <div class="grid">
           ${images.map(url => `<img src="${url}">`).join("")}
         </div>
