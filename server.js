@@ -246,12 +246,14 @@ app.get("/gallery", async (req, res) => {
       /* 💻 Desktop */
       @media (min-width: 900px) {
         body {
-          padding: 24px 40px;
+          padding: 0;
         }
 
         .grid {
           grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
           gap: 18px;
+          padding: 24px 40px;
+          margin-top: 24px;
         }
           /* 📌 Botón siempre visible en mobile */
     @media (max-width: 599px) {
