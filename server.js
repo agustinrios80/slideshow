@@ -268,7 +268,7 @@ app.get("/gallery", async (req, res) => {
         width: 100%;
         height: 55vh;
         min-height: 320px;
-        background: url("/assets/portada.jpg") center / cover no-repeat;
+        background: url("/assets/portada.jpeg") center / cover no-repeat;
         background-size: cover;
         background-position: center;
         border-radius: 0 0 22px 22px;
