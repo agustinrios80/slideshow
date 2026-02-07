@@ -5,94 +5,110 @@
   <link rel="stylesheet" href="estilo-upload.css">
   <link rel="stylesheet" href="/style.css">
   <style>
-       * {
+  * {
   box-sizing: border-box;
-}
+    }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #191970;
-  font-family: Arial, sans-serif;
-  color: white;
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #191970;
+      font-family: Arial, sans-serif;
+      color: white;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-/* Tarjeta */
-.upload-container {
-  width: 100%;
-  max-width: 380px;
-  background: #1e1e3f;
-  padding: 28px 22px;
-  border-radius: 18px;
-  box-shadow: 0 15px 40px rgba(0,0,0,.5);
-  text-align: center;
-}
+    /* CONTENEDOR PRINCIPAL */
+    .upload-container {
+      width: 100%;
+      min-height: 100vh;
 
-/* Título */
-.upload-container h1 {
-  font-size: 1.6rem;
-  margin-bottom: 24px;
-}
+      padding: 32px 20px;
 
-/* Formulario */
-.upload-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-/* Input file */
-.upload-container input[type="file"] {
-  width: 100%;
-  background: white;
-  color: black;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 1rem;
-}
+      text-align: center;
+    }
 
-/* Botón */
-.upload-container button {
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  background: #4caf50;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-}
+    /* TARJETA */
+    .upload-card {
+      width: 100%;
+      max-width: 420px;
 
-.upload-container button:active {
-  transform: scale(0.96);
-}
+      background: #1e1e3f;
+      padding: 32px 24px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.5);
+    }
 
-/* 💻 Desktop */
-@media (min-width: 768px) {
-  .upload-container {
-    padding: 36px 32px;
-  }
+    /* TÍTULO */
+    .upload-card h1 {
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      margin-bottom: 28px;
+    }
 
-  .upload-container h1 {
-    font-size: 1.9rem;
-  }
-}
+    /* FORM */
+    .upload-card form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* INPUT FILE */
+    .upload-card input[type="file"] {
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: none;
+    }
+
+    /* BOTÓN */
+    .upload-card button {
+      padding: 16px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 14px;
+      border: none;
+      background: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    .upload-card button:active {
+      transform: scale(0.96);
+    }
+
+    /* 💻 DESKTOP */
+    @media (min-width: 900px) {
+      .upload-container {
+        min-height: auto;
+        padding: 60px 20px;
+      }
+
+      .upload-card {
+        padding: 40px 36px;
+      }
+    }
 
   </style>
 </head>
 <body>
   <div class="upload-container">
-    <h1>Subí tu foto 📸</h1>
+    <div class="upload-card">
+      <h1>Subí tu foto 📸</h1>
 
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-      <input type="file" name="photo" accept="image/*" required>
-      <button type="submit">Subir foto</button>
-    </form>
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="photo" accept="image/*" required>
+        <button type="submit">Subir foto</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>
