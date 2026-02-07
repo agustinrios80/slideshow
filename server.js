@@ -177,10 +177,6 @@ app.get("/gallery", async (req, res) => {
       <head>
         <title>Galería</title>
         <style>
-        * {
-        outline: 1px solid red;
-        }
-
           body {
             background: #191970;
             color: white;
@@ -269,6 +265,7 @@ app.get("/gallery", async (req, res) => {
     }
       .hero {
         position: relative;
+        top: 0;
         width: 100vw;
         height: 40vh;          /* antes 55vh */
         min-height: 260px;     /* más chico */
@@ -321,8 +318,8 @@ app.get("/gallery", async (req, res) => {
       }
 
       .hero-wrapper {
-        padding: 0;
-        margin: 0;
+        padding-top: 0;
+        margin-top: 0;
       }
 
       </style>
