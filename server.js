@@ -265,9 +265,10 @@ app.get("/gallery", async (req, res) => {
     }
       .hero {
         position: relative;
-        width: 100%;
+        width: 100vw;
         height: 40vh;          /* antes 55vh */
         min-height: 260px;     /* más chico */
+        margin-left: calc(50% - 50vw);
         background: url("/assets/portada.jpeg") center 20% / cover no-repeat;
         border-radius: 0 0 22px 22px;
         overflow: hidden;
