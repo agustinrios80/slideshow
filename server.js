@@ -177,16 +177,20 @@ app.get("/gallery", async (req, res) => {
       <head>
         <title>Galería</title>
         <style>
+        * {
+        outline: 1px solid red;
+        }
+
           body {
             background: #191970;
             color: white;
             font-family: Arial;
             margin: 0;
-            padding: 20px;
+            padding: 0;
           }
           header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 0;
           }
           header h1 {
             font-size: 1.6rem;
