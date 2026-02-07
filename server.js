@@ -321,26 +321,26 @@ app.get("/gallery", async (req, res) => {
 
       </head>
       <body>
-      <header>
-        <h1>Cumple de jazmin</h1>
-        <a href="/upload" class="upload-btn">
-          <img src="/assets/subir-imagen.jpeg" alt="Subir imagen">
-        </a>
-      </header>
-        <div class="hero-overlay"></div>
-        
-        <div class="hero-content">
-          <h1>Cumple de Jazmín 🎉</h1>
-          <p>Subí tus fotos y compartí el momento</p>
 
-          <a href="/upload" class="hero-upload">
-            <img src="/assets/upload-btn.jpeg" alt="Subir foto">
-          </a>
+        <div class="hero">
+          <div class="hero-overlay"></div>
+
+          <div class="hero-content">
+            <h1>Cumple de Jazmín 🎉</h1>
+            <p>Subí tus fotos y compartí el momento</p>
+
+            <a href="/upload" class="hero-upload">
+              <img src="/assets/upload-btn.jpeg" alt="Subir foto">
+            </a>
+          </div>
         </div>
+
         <div class="grid">
           ${images.map(url => `<img src="${url}">`).join("")}
         </div>
+
       </body>
+
       </html>
     `);
   } catch (err) {
