@@ -316,21 +316,27 @@ app.get("/gallery", async (req, res) => {
         transform: scale(1.05);
       }
 
+      .hero-wrapper {
+        padding: 0;
+        margin: 0;
+      }
+
       </style>
 
       </head>
       <body>
+        <div class="hero-wrapper">
+          <div class="hero">
+            <div class="hero-overlay"></div>
 
-        <div class="hero">
-          <div class="hero-overlay"></div>
+            <div class="hero-content">
+              <h1>Cumple de Jazmín 🎉</h1>
+              <p>Subí tus fotos y compartí el momento</p>
 
-          <div class="hero-content">
-            <h1>Cumple de Jazmín 🎉</h1>
-            <p>Subí tus fotos y compartí el momento</p>
-
-            <a href="/upload" class="hero-upload">
-              <img src="/assets/upload-btn.jpeg" alt="Subir foto">
-            </a>
+              <a href="/upload" class="hero-upload">
+                <img src="/assets/upload-btn.jpeg" alt="Subir foto">
+              </a>
+            </div>
           </div>
         </div>
 
