@@ -263,8 +263,60 @@ app.get("/gallery", async (req, res) => {
         z-index: 10;
       }
     }
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 55vh;
+        min-height: 320px;
+        background: url("/assets/portada.jpg") center / cover no-repeat;
+        border-radius: 0 0 22px 22px;
+        overflow: hidden;
+      }
 
-        </style>
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        padding: 20px;
+      }
+
+      .hero-content h1 {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        margin-bottom: 8px;
+      }
+
+      .hero-content p {
+        font-size: clamp(1rem, 3vw, 1.2rem);
+        opacity: 0.9;
+        margin-bottom: 16px;
+      }
+
+      .hero-upload img {
+        width: 200px;
+        max-width: 70%;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .hero-upload img:hover {
+        transform: scale(1.05);
+      }
+
+      </style>
+      
       </head>
       <body>
       <header>
@@ -273,6 +325,16 @@ app.get("/gallery", async (req, res) => {
           <img src="/assets/subir-imagen.jpeg" alt="Subir imagen">
         </a>
       </header>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+          <h1>Cumple de Jazmín 🎉</h1>
+          <p>Subí tus fotos y compartí el momento</p>
+
+          <a href="/upload" class="hero-upload">
+            <img src="/assets/upload-btn.jpeg" alt="Subir foto">
+          </a>
+        </div>
         <div class="grid">
           ${images.map(url => `<img src="${url}">`).join("")}
         </div>
