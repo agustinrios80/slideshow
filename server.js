@@ -266,11 +266,9 @@ app.get("/gallery", async (req, res) => {
       .hero {
         position: relative;
         width: 100%;
-        height: 55vh;
-        min-height: 320px;
-        background: url("/assets/portada.jpeg") center / cover no-repeat;
-        background-size: cover;
-        background-position: center;
+        height: 40vh;          /* antes 55vh */
+        min-height: 260px;     /* más chico */
+        background: url("/assets/portada.jpeg") center 20% / cover no-repeat;
         border-radius: 0 0 22px 22px;
         overflow: hidden;
       }
@@ -278,7 +276,7 @@ app.get("/gallery", async (req, res) => {
       .hero-overlay {
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.45);
+        background: rgba(0, 0, 0, 0.35);
       }
 
       .hero-content {
